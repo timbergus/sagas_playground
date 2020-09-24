@@ -1,10 +1,13 @@
 type UserProps = {
-  id: string;
+  id: number;
   name: string;
-  surname: string;
-  age: number;
+  username: string;
+  email: string;
+  phone: string;
 };
 
 type UsersProps = {
   users: UserProps[];
+  loading: boolean;
+  error: string;
 };

@@ -1,21 +1,33 @@
-import { GET_USER } from '../action-types';
+import { createSlice } from '@reduxjs/toolkit';
 
 const usersInitialState: UsersProps = {
   users: [],
+  loading: false,
+  error: '',
 };
 
-export default function users(
-  state = usersInitialState,
-  action: { type: string; payload: UserProps[] } = { type: '', payload: [] }
-) {
-  const { type, payload } = action;
-  switch (type) {
-    case GET_USER:
-      return {
-        ...state,
-        users: [...payload],
-      };
-    default:
-      return state;
-  }
-}
+const usersSlice = createSlice({
+  name: 'users',
+  initialState: usersInitialState,
+  reducers: {
+    getUsersRequest(state) {
+      state.loading = true;
+    },
+    getUsersSuccess(state, action) {
+      state.users = action.payload;
+      state.loading = false;
+    },
+    getUsersFail(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
+  },
+});
+
+export const {
+  getUsersRequest,
+  getUsersSuccess,
+  getUsersFail,
+} = usersSlice.actions;
+
+export default usersSlice.reducer;

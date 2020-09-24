@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { CustomTableRow } from './components/custom-table-row';
 
-import { getUsers } from './redux/actions/users';
+import { getUsersRequest } from './redux/reducers/users';
 
 import './App.css';
 
@@ -33,23 +33,30 @@ const createClasses = makeStyles({
 
 function App() {
   const dispatch = useDispatch();
-  const users = useSelector(
-    (state: { users: UsersProps }) => state.users.users
+  const { users, loading, error } = useSelector(
+    (state: { users: UsersProps }) => state.users
   );
   const classes = createClasses();
 
   useEffect(() => {
-    dispatch(
-      getUsers([
-        {
-          id: '0',
-          name: 'John',
-          surname: 'Doe',
-          age: 40,
-        },
-      ])
-    );
+    dispatch(getUsersRequest());
   }, [dispatch]);
+
+  if (loading) {
+    return (
+      <Paper elevation={3} className={classes.notification}>
+        Loading!
+      </Paper>
+    );
+  }
+
+  if (error) {
+    return (
+      <Paper elevation={3} className={classes.notification}>
+        {error}
+      </Paper>
+    );
+  }
 
   return (
     <>
@@ -59,8 +66,9 @@ function App() {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell>Surname</TableCell>
-                <TableCell>Age</TableCell>
+                <TableCell>Username</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell>Phone</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

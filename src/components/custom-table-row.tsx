@@ -11,8 +11,9 @@ export const CustomTableRow: React.FC<TableRowProps> = ({ user }) => {
   return (
     <TableRow>
       <TableCell>{user.name}</TableCell>
-      <TableCell>{user.surname}</TableCell>
-      <TableCell>{user.age}</TableCell>
+      <TableCell>{user.username}</TableCell>
+      <TableCell>{user.email}</TableCell>
+      <TableCell>{user.phone}</TableCell>
     </TableRow>
   );
 };
