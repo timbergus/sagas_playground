@@ -9,7 +9,7 @@ type TableRowProps = {
 
 export const CustomTableRow: React.FC<TableRowProps> = ({ user }) => {
   return (
-    <TableRow key={user.id}>
+    <TableRow>
       <TableCell>{user.name}</TableCell>
       <TableCell>{user.surname}</TableCell>
       <TableCell>{user.age}</TableCell>

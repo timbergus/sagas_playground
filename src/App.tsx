@@ -65,7 +65,7 @@ function App() {
             </TableHead>
             <TableBody>
               {users.map((user) => (
-                <CustomTableRow user={user} />
+                <CustomTableRow key={user.id} user={user} />
               ))}
             </TableBody>
           </Table>
