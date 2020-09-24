@@ -10,11 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableBody from '@material-ui/core/TableBody';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { CustomTableRow } from './components/custom-table-row';
-
 import { getUsersRequest } from './redux/reducers/users';
-
-import './App.css';
 
 const createClasses = makeStyles({
   table: {
@@ -73,7 +69,12 @@ function App() {
             </TableHead>
             <TableBody>
               {users.map((user) => (
-                <CustomTableRow key={user.id} user={user} />
+                <TableRow key={user.id}>
+                  <TableCell>{user.name}</TableCell>
+                  <TableCell>{user.username}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.phone}</TableCell>
+                </TableRow>
               ))}
             </TableBody>
           </Table>
